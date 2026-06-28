@@ -68,27 +68,27 @@ atomi/workspace:
     - version: 45
       time: 2026-06-28T00:30:50.912614Z
       answers:
-        atomi/platform:
-          type: String
-          value: diene
-        atomi/llm:
-          type: Bool
-          value: true
         atomi/helm:
-          type: Bool
-          value: true
-        atomi/secret:
           type: Bool
           value: true
         atomi/service:
           type: String
           value: bun-base
-        atomi/docker:
-          type: Bool
-          value: true
         cyan/nix/llm:
           type: String
           value: yes
+        atomi/llm:
+          type: Bool
+          value: true
+        atomi/secret:
+          type: Bool
+          value: true
+        atomi/docker:
+          type: Bool
+          value: true
+        atomi/platform:
+          type: String
+          value: diene
         cyan/nix/basic:
           type: String
           value: yes
