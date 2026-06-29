@@ -5,7 +5,7 @@ title: Bun Baseline
 
 # Bun Baseline
 
-`bun-base` is the Bun foundation for `adelphi-liong/diene.bun-base`. It is a
+`bun-base` is the Bun foundation for `AtomiCloud/diene.bun-base`. It is a
 **sibling-template foundation**: sibling templates copy it and adapt a small set
 of settings (see [Template maintenance](#template-maintenance)) before formal
 CyanPrint template promotion.
@@ -163,7 +163,7 @@ template is expected to adapt:
 - **Coverage thresholds** — `codecov.yml` (`target`, `informational`) and any
   Bun `coverageThreshold` added to the `bunfig.*.toml` files.
 - **Docker runtime entrypoint** — `infra/Dockerfile` `ENTRYPOINT`.
-- **Badges / template promotion** — the `adelphi-liong/diene.bun-base` paths in
+- **Badges / template promotion** — the `AtomiCloud/diene.bun-base` paths in
   `README.md` badges are rewritten on promotion.
 - **Sample source/tests** — `src/lib`, `src/adapters`, `src/index.ts`, and the
   matching `tests/` suites are illustrative and replaced per service.

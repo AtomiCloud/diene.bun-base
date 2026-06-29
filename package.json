@@ -2,7 +2,7 @@
   "name": "bun-base",
   "version": "0.0.0",
   "private": true,
-  "description": "Bun template baseline for adelphi-liong/diene.bun-base",
+  "description": "Bun template baseline for AtomiCloud/diene.bun-base",
   "type": "module",
   "module": "src/index.ts",
   "exports": {
