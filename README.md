@@ -25,3 +25,7 @@ See [docs/developer/standard/nix.md](docs/developer/standard/nix.md) for the ful
 - Environment groups and shells
 - Formatters and pre-commit hooks
 - Adding registries
+
+## Bun Baseline
+
+See [docs/developer/bun-baseline.md](docs/developer/bun-baseline.md) for Bun-specific commands, test modes, coverage, and runtime notes.

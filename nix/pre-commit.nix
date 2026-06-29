@@ -16,6 +16,36 @@ pre-commit-lib.run {
       language = "system";
     };
 
+    a-biome = {
+      enable = true;
+      description = "Lint TypeScript/JavaScript with Biome";
+      entry = "./node_modules/.bin/biome lint --no-errors-on-unmatched";
+      files = "\\.(ts|tsx|mts|cts|js|jsx|mjs|cjs)$";
+      name = "Biome Lint";
+      pass_filenames = true;
+      language = "system";
+    };
+
+    a-deadcode = {
+      enable = true;
+      description = "Detect repo dead code with Knip (conservative, high-confidence)";
+      entry = "./node_modules/.bin/knip --config knip.json";
+      files = "(^package\\.json$|^tsconfig\\.json$|^knip\\.json$|\\.(ts|tsx)$)";
+      name = "Knip Repo Deadcode";
+      pass_filenames = false;
+      language = "system";
+    };
+
+    a-deadcode-production = {
+      enable = true;
+      description = "Detect production dead code with Knip (runtime surface)";
+      entry = "./node_modules/.bin/knip --config knip.production.json";
+      files = "(^package\\.json$|^tsconfig\\.json$|^knip\\.production\\.json$|\\.(ts|tsx)$)";
+      name = "Knip Production Deadcode";
+      pass_filenames = false;
+      language = "system";
+    };
+
     a-enforce-gitlint = {
       enable = true;
       description = "Enforce atomi_releaser conforms to gitlint";
@@ -91,6 +121,9 @@ pre-commit-lib.run {
         ".*(Changelog|README|CommitConventions).+(MD|md)"
         ".*infra/root_chart.*"
         ".*node_modules.*"
+        ".*dist/.*"
+        ".*coverage/.*"
+        ".*\\.lock"
       ];
       package = formatter;
     };

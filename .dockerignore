@@ -1,6 +1,11 @@
-### Build
+### Bun
 node_modules
 dist
+coverage
+*.tsbuildinfo
+tests
+
+### Build
 .target
 *.log
 

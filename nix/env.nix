@@ -20,6 +20,7 @@ with packages;
   ];
 
   main = [
+    bun
   ];
 
   releaser = [

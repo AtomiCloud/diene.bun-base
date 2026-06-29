@@ -24,6 +24,7 @@ let
       {
         inherit
           actionlint
+          bun
           git
           gitlint
           go-task
