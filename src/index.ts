@@ -30,8 +30,26 @@ export async function persistSample(
 }
 
 async function main(): Promise<void> {
-  const composed = buildSampleKey("Bun Base", "sample key");
-  console.log(`composed key: ${composed}`);
+  const connection =
+    process.env.REDIS_HOST && process.env.REDIS_PORT
+      ? {
+          host: process.env.REDIS_HOST,
+          port: Number(process.env.REDIS_PORT),
+        }
+      : undefined;
+
+  if (connection) {
+    const store = createRedisStore(connection);
+    try {
+      const value = await persistSample(store, "Bun Base", "sample key", "sample value");
+      console.log(`round-tripped value: ${value}`);
+    } finally {
+      await store.close();
+    }
+    return;
+  }
+
+  console.log(`composed key: ${buildSampleKey("Bun Base", "sample key")}`);
 }
 
 if (import.meta.main) {

@@ -34,13 +34,21 @@ tasks:
     cmds:
       - pre-commit run --all-files
   deadcode:
-    desc: Conservative dead-code gate (Knip, high-confidence)
+    desc: Conservative repo dead-code gate (Knip, high-confidence)
     cmds:
       - bun run deadcode
+  deadcode:production:
+    desc: Conservative production dead-code gate (Knip, runtime surface)
+    cmds:
+      - bun run deadcode:production
   deadcode:llm:
-    desc: Loose dead-code discovery for review — investigate findings, do not ignore
+    desc: Loose repo dead-code discovery for review — investigate findings, do not ignore
     cmds:
       - bun run deadcode:llm
+  deadcode:production:llm:
+    desc: Loose production dead-code discovery for review — investigate findings, do not ignore
+    cmds:
+      - bun run deadcode:production:llm
   test:
     desc: Run unit + integration tests
     cmds:

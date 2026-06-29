@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/index.ts", "src/adapter/redis-kv-store.ts"],
+  "project": ["src/**/*.ts"],
+  "includeEntryExports": true
+}

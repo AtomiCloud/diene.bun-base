@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
+        with:
+          namespacelabs: false
       - name: Run pre-commit
         run: nix develop .#ci -c ./scripts/ci/pre-commit.sh
 
@@ -17,6 +19,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
+        with:
+          namespacelabs: false
       - name: Run unit tests
         run: nix develop .#ci -c ./scripts/ci/test-unit.sh
       - name: Upload unit coverage artifact
@@ -42,6 +46,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
+        with:
+          namespacelabs: false
       - uses: AtomiCloud/actions.setup-docker@v2
       - name: Run integration tests
         run: nix develop .#ci -c ./scripts/ci/test-int.sh
@@ -68,6 +74,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
+        with:
+          namespacelabs: false
       - name: Build sample bundle
         run: nix develop .#ci -c ./scripts/ci/build.sh
 
@@ -107,6 +115,8 @@ jobs:
       packages: write
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
+        with:
+          namespacelabs: false
       - name: Build and Push Helm
         run: nix develop .#cd -c ./scripts/ci/helm.sh ./infra/root_chart
         env:

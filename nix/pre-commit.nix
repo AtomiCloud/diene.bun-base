@@ -28,10 +28,20 @@ pre-commit-lib.run {
 
     a-deadcode = {
       enable = true;
-      description = "Detect dead code with Knip (conservative, high-confidence)";
+      description = "Detect repo dead code with Knip (conservative, high-confidence)";
       entry = "${packages.knip}/bin/knip --config knip.json";
       files = "\\.(ts|tsx)$";
-      name = "Knip Deadcode";
+      name = "Knip Repo Deadcode";
+      pass_filenames = false;
+      language = "system";
+    };
+
+    a-deadcode-production = {
+      enable = true;
+      description = "Detect production dead code with Knip (runtime surface)";
+      entry = "${packages.knip}/bin/knip --config knip.production.json --production";
+      files = "\\.(ts|tsx)$";
+      name = "Knip Production Deadcode";
       pass_filenames = false;
       language = "system";
     };

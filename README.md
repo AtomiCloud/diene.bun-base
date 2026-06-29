@@ -37,8 +37,10 @@ bunx tsc --noEmit                      # type-check
 bun test --config=bunfig.unit.toml     # fast unit tests (pure src/lib)
 bun test --config=bunfig.int.toml      # integration tests (Testcontainers, needs Docker)
 bun run build                          # bundle the sample entrypoint to dist/
-bun run deadcode                       # conservative dead-code gate (Knip)
-bun run deadcode:llm                   # loose dead-code discovery for review
+bun run deadcode                       # conservative repo dead-code gate
+bun run deadcode:production            # conservative runtime dead-code gate
+bun run deadcode:llm                   # loose repo dead-code discovery for review
+bun run deadcode:production:llm        # loose runtime dead-code discovery for review
 ```
 
 > **Note:** Bun parses `--config` as a global flag, so the value must be
@@ -50,13 +52,23 @@ bun run deadcode:llm                   # loose dead-code discovery for review
 - `src/adapter/` — side-effect boundary (integration-tested via Testcontainers).
 - `src/index.ts` — composition root wiring the library to the adapter.
 
+The default executable prints a composed sample key. When `REDIS_HOST` and
+`REDIS_PORT` are set, it uses the Redis adapter to persist and read back a
+sample value.
+
 ### Dead-code configs
 
-- `knip.json` — **conservative**, high-confidence gate run by pre-commit and CI.
-- `knip.llm.json` — **loose** discovery (`bun run deadcode:llm`). Findings here
-  are prompts for an agent/human to **investigate**, not a backlog of ignores to
-  add. Prefer removing genuinely unused code or wiring up the dependency over
-  silencing the finding.
+- `knip.json` — **conservative repo** gate. Test files are valid entry points.
+- `knip.production.json` — **conservative production** gate. Runtime starts at
+  `src/index.ts` plus the Redis adapter example; test-only reachability does
+  not count.
+- `knip.llm.json` — **loose repo** discovery (`bun run deadcode:llm`).
+- `knip.production.llm.json` — **loose production** discovery
+  (`bun run deadcode:production:llm`).
+
+Loose findings are prompts for an agent/human to **investigate**, not a backlog
+of ignores to add. Prefer removing genuinely unused code or wiring up the
+dependency over silencing the finding.
 
 ## Nix Configuration
 

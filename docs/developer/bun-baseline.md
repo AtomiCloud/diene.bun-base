@@ -20,25 +20,27 @@ see [Taskfile](standard/taskfile.md), [CI/CD](standard/ci-cd.md),
 
 All commands run inside the Nix dev shell (`direnv allow` once). Use `pls`:
 
-| Command             | What it does                                              |
-| ------------------- | --------------------------------------------------------- |
-| `pls setup`         | Install pinned deps + Infisical login (no CI scripts)     |
-| `pls lint`          | Run all pre-commit hooks (Biome, Knip, treefmt, …)        |
-| `pls deadcode`      | Conservative dead-code gate (Knip, high-confidence)       |
-| `pls deadcode:llm`  | Loose dead-code discovery for review (investigate output) |
-| `pls unit`          | Run unit tests                                            |
-| `pls unit:coverage` | Unit tests + coverage artifact (`coverage/unit`)          |
-| `pls unit:watch`    | Unit tests in watch mode                                  |
-| `pls int`           | Integration tests (Testcontainers, needs Docker)          |
-| `pls int:coverage`  | Integration tests + coverage artifact (`coverage/int`)    |
-| `pls int:watch`     | Integration tests in watch mode                           |
-| `pls test`          | Unit + integration tests                                  |
-| `pls test:coverage` | Both suites, separate coverage artifacts                  |
-| `pls test:watch`    | Watch the fast unit suite (aggregate watch entry point)   |
-| `pls build`         | Bundle the sample entrypoint to `dist/index.js`           |
-| `pls clean`         | Remove `dist`, `node_modules`, `coverage`                 |
-| `pls docker:build`  | Build the runtime image locally                           |
-| `pls docker:run`    | Run the built image                                       |
+| Command                       | What it does                                                   |
+| ----------------------------- | -------------------------------------------------------------- |
+| `pls setup`                   | Install pinned deps + Infisical login (no CI scripts)          |
+| `pls lint`                    | Run all pre-commit hooks (Biome, Knip, treefmt, …)             |
+| `pls deadcode`                | Conservative repo dead-code gate (tests count as entries)      |
+| `pls deadcode:production`     | Conservative runtime dead-code gate (`src/index.ts` + adapter) |
+| `pls deadcode:llm`            | Loose repo dead-code discovery for review                      |
+| `pls deadcode:production:llm` | Loose runtime dead-code discovery for review                   |
+| `pls unit`                    | Run unit tests                                                 |
+| `pls unit:coverage`           | Unit tests + coverage artifact (`coverage/unit`)               |
+| `pls unit:watch`              | Unit tests in watch mode                                       |
+| `pls int`                     | Integration tests (Testcontainers, needs Docker)               |
+| `pls int:coverage`            | Integration tests + coverage artifact (`coverage/int`)         |
+| `pls int:watch`               | Integration tests in watch mode                                |
+| `pls test`                    | Unit + integration tests                                       |
+| `pls test:coverage`           | Both suites, separate coverage artifacts                       |
+| `pls test:watch`              | Watch the fast unit suite (aggregate watch entry point)        |
+| `pls build`                   | Bundle the sample entrypoint to `dist/index.js`                |
+| `pls clean`                   | Remove `dist`, `node_modules`, `coverage`                      |
+| `pls docker:build`            | Build the runtime image locally                                |
+| `pls docker:run`              | Run the built image                                            |
 
 ## Test modes
 
@@ -83,7 +85,9 @@ namespaces — there is one test recipe, not two.
 - `infra/Dockerfile` is a multi-stage Bun build: install deps + bundle in the
   build stage, then copy `dist/` onto `oven/bun:1-alpine` and run it.
 - `pls docker:build && pls docker:run` builds and runs the sample executable; it
-  prints the composed sample key.
+  prints the composed sample key by default. When `REDIS_HOST` and `REDIS_PORT`
+  are set, the executable uses the Redis adapter to persist and read back a
+  sample value.
 
 ## External service / compute cost
 

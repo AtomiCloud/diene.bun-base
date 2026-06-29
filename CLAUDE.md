@@ -37,17 +37,18 @@ All commits must follow the conventional commits specification. Use `sg` for lin
 
 ## Supported local commands
 
-| Command                                       | Purpose                                        |
-| --------------------------------------------- | ---------------------------------------------- |
-| `pls setup`                                   | Install deps + Infisical login (no CI scripts) |
-| `pls lint`                                    | All pre-commit hooks (Biome, Knip, treefmt, …) |
-| `pls deadcode` / `deadcode:llm`               | Conservative gate / loose discovery for review |
-| `pls unit` / `int` / `test`                   | Unit / integration / both                      |
-| `pls test:coverage`                           | Both suites with separate coverage artifacts   |
-| `pls unit:watch` / `int:watch` / `test:watch` | Watch modes                                    |
-| `pls build`                                   | Bundle the sample entrypoint to `dist/`        |
-| `pls clean`                                   | Remove `dist`, `node_modules`, `coverage`      |
-| `pls docker:build` / `docker:run`             | Build / run the runtime image                  |
+| Command                                        | Purpose                                        |
+| ---------------------------------------------- | ---------------------------------------------- |
+| `pls setup`                                    | Install deps + Infisical login (no CI scripts) |
+| `pls lint`                                     | All pre-commit hooks (Biome, Knip, treefmt, …) |
+| `pls deadcode` / `deadcode:production`         | Conservative repo / runtime gates              |
+| `pls deadcode:llm` / `deadcode:production:llm` | Loose repo / runtime discovery for review      |
+| `pls unit` / `int` / `test`                    | Unit / integration / both                      |
+| `pls test:coverage`                            | Both suites with separate coverage artifacts   |
+| `pls unit:watch` / `int:watch` / `test:watch`  | Watch modes                                    |
+| `pls build`                                    | Bundle the sample entrypoint to `dist/`        |
+| `pls clean`                                    | Remove `dist`, `node_modules`, `coverage`      |
+| `pls docker:build` / `docker:run`              | Build / run the runtime image                  |
 
 ## Test modes & coverage
 
@@ -57,7 +58,7 @@ All commits must follow the conventional commits specification. Use `sg` for lin
 
 ## Dead-code expectations
 
-`pls deadcode:llm` findings are prompts to **investigate** — remove unused code or wire up the dependency. Do **not** silence them by default. `pls deadcode` is the high-confidence gate run by pre-commit/CI.
+`pls deadcode` checks the repo surface where tests are valid entries. `pls deadcode:production` checks the runtime surface from `src/index.ts`. The `:llm` variants are prompts to **investigate** — remove unused code or wire up the dependency. Do **not** silence them by default.
 
 ## Template-maintenance expectations
 

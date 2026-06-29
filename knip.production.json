@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/index.ts", "src/adapter/redis-kv-store.ts"],
+  "project": ["src/**/*.ts"],
+  "rules": {
+    "files": "error",
+    "exports": "error",
+    "types": "error",
+    "nsExports": "error",
+    "nsTypes": "error",
+    "duplicates": "error",
+    "optionalPeerDependencies": "off",
+    "binaries": "off",
+    "enumMembers": "off",
+    "classMembers": "off"
+  }
+}

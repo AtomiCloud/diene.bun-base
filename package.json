@@ -5,6 +5,12 @@
   "description": "Bun template baseline for adelphi-liong/diene.bun-base",
   "type": "module",
   "module": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./adapter/kv-store": "./src/adapter/kv-store.ts",
+    "./adapter/redis-kv-store": "./src/adapter/redis-kv-store.ts",
+    "./lib/slug": "./src/lib/slug.ts"
+  },
   "scripts": {
     "start": "bun run src/index.ts",
     "build": "bun build ./src/index.ts --outdir ./dist --target bun",
@@ -18,7 +24,9 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "deadcode": "knip --config knip.json",
-    "deadcode:llm": "knip --config knip.llm.json --no-exit-code"
+    "deadcode:production": "knip --config knip.production.json --production",
+    "deadcode:llm": "knip --config knip.llm.json --no-exit-code",
+    "deadcode:production:llm": "knip --config knip.production.llm.json --production --no-exit-code"
   },
   "dependencies": {
     "ioredis": "^5.4.2"
