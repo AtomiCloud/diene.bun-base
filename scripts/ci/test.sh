@@ -23,7 +23,8 @@ set -e
 if [[ -f "${COVERAGE_DIR}/lcov.info" ]]; then
   echo "✅ Coverage artifact: ${COVERAGE_DIR}/lcov.info"
 else
-  echo "📝 No coverage artifact found at ${COVERAGE_DIR}/lcov.info"
+  echo "❌ No coverage artifact found at ${COVERAGE_DIR}/lcov.info" >&2
+  exit 1
 fi
 
 if [[ ${test_status} -ne 0 ]]; then

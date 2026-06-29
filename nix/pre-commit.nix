@@ -30,7 +30,7 @@ pre-commit-lib.run {
       enable = true;
       description = "Detect repo dead code with Knip (conservative, high-confidence)";
       entry = "./node_modules/.bin/knip --config knip.json";
-      files = "\\.(ts|tsx)$";
+      files = "(^package\\.json$|^tsconfig\\.json$|^knip\\.json$|\\.(ts|tsx)$)";
       name = "Knip Repo Deadcode";
       pass_filenames = false;
       language = "system";
@@ -40,7 +40,7 @@ pre-commit-lib.run {
       enable = true;
       description = "Detect production dead code with Knip (runtime surface)";
       entry = "./node_modules/.bin/knip --config knip.production.json";
-      files = "\\.(ts|tsx)$";
+      files = "(^package\\.json$|^tsconfig\\.json$|^knip\\.production\\.json$|\\.(ts|tsx)$)";
       name = "Knip Production Deadcode";
       pass_filenames = false;
       language = "system";

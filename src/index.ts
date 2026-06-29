@@ -22,11 +22,16 @@ export async function persistSample(
 }
 
 async function main(): Promise<void> {
+  const parsedPort = process.env.REDIS_PORT === undefined ? undefined : Number(process.env.REDIS_PORT);
   const connection =
-    process.env.REDIS_HOST && process.env.REDIS_PORT
+    process.env.REDIS_HOST &&
+    parsedPort !== undefined &&
+    Number.isInteger(parsedPort) &&
+    parsedPort > 0 &&
+    parsedPort <= 65535
       ? {
           host: process.env.REDIS_HOST,
-          port: Number(process.env.REDIS_PORT),
+          port: parsedPort,
         }
       : undefined;
 

@@ -9,7 +9,7 @@ describe('RedisKeyValueStore (Testcontainers)', () => {
   let subject: IKeyValueStore | undefined;
 
   beforeAll(async () => {
-    container = await new GenericContainer('redis:7-alpine')
+    container = await new GenericContainer('redis:7.4.5-alpine')
       .withExposedPorts(6379)
       .withWaitStrategy(Wait.forLogMessage(/Ready to accept connections/))
       .start();
