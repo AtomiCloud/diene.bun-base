@@ -1,6 +1,9 @@
 name: ⚡ Reusable Integration Tests
 on:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: false
 jobs:
   int:
     name: Integration Tests
