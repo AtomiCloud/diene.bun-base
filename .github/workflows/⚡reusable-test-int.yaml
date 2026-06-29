@@ -1,9 +1,6 @@
 name: ⚡ Reusable Integration Tests
 on:
   workflow_call:
-    secrets:
-      CODECOV_TOKEN:
-        required: false
 jobs:
   int:
     name: Integration Tests
@@ -28,8 +25,8 @@ jobs:
           if-no-files-found: warn
       # Upload integration coverage to Codecov under its own flag. Non-blocking:
       # both `continue-on-error` and `fail_ci_if_error: false` keep an upload
-      # failure (e.g. missing token) from failing the job — the blocking gate is
-      # the local test/coverage run above.
+      # failure from failing the job — the blocking gate is the local
+      # test/coverage run above.
       - name: Upload integration coverage to Codecov
         if: always()
         continue-on-error: true
@@ -37,6 +34,5 @@ jobs:
         with:
           files: coverage/int/lcov.info
           flags: int
-          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
           disable_search: true

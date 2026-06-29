@@ -41,7 +41,7 @@ jobs:
 
           # registry
           DOMAIN: ghcr.io
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          DOCKER_PASSWORD: ${{ github.token }}
           DOCKER_USER: ${{ github.actor }}
 
           # downwards API
