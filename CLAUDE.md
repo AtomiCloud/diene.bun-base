@@ -31,6 +31,38 @@ Only selected language-specific standards are generated. Do not link to missing 
 
 All commits must follow the conventional commits specification. Use `sg` for linting commit messages. See [docs/developer/standard/conventional-commits.md](docs/developer/standard/conventional-commits.md) for details.
 
+# Quickstart
+
+`bun-base` is the Bun template foundation. Run everything through `pls` inside the Nix dev shell (`direnv allow` once). Full details: [docs/developer/bun-baseline.md](docs/developer/bun-baseline.md) and the [`/bun-base`](.claude/skills/bun-base/SKILL.md) skill.
+
+## Supported local commands
+
+| Command                                       | Purpose                                        |
+| --------------------------------------------- | ---------------------------------------------- |
+| `pls setup`                                   | Install deps + Infisical login (no CI scripts) |
+| `pls lint`                                    | All pre-commit hooks (Biome, Knip, treefmt, …) |
+| `pls deadcode` / `deadcode:llm`               | Conservative gate / loose discovery for review |
+| `pls unit` / `int` / `test`                   | Unit / integration / both                      |
+| `pls test:coverage`                           | Both suites with separate coverage artifacts   |
+| `pls unit:watch` / `int:watch` / `test:watch` | Watch modes                                    |
+| `pls build`                                   | Bundle the sample entrypoint to `dist/`        |
+| `pls clean`                                   | Remove `dist`, `node_modules`, `coverage`      |
+| `pls docker:build` / `docker:run`             | Build / run the runtime image                  |
+
+## Test modes & coverage
+
+- **Unit** (`bunfig.unit.toml`) — fast, pure `src/lib`, no containers.
+- **Integration** (`bunfig.int.toml`) — `src/adapter` against a Testcontainers Redis (needs Docker).
+- The local test/coverage run is the **blocking** gate; the **Codecov upload is non-blocking**. Coverage paths/reporters live in the `bunfig.*.toml` files; thresholds in `codecov.yml`.
+
+## Dead-code expectations
+
+`pls deadcode:llm` findings are prompts to **investigate** — remove unused code or wire up the dependency. Do **not** silence them by default. `pls deadcode` is the high-confidence gate run by pre-commit/CI.
+
+## Template-maintenance expectations
+
+`bun-base` is a **sibling-template foundation**. Downstream templates adapt: package metadata, coverage thresholds, Docker `ENTRYPOINT`, README badges, and the sample source/tests. Keep shared scaffold edits additive; merge stays manual. See [docs/developer/bun-baseline.md](docs/developer/bun-baseline.md).
+
 # Development Environment
 
 All binaries, tools, and PATH are managed by **Nix**. Do not install tools manually or modify PATH outside of the nix configuration.

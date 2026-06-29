@@ -4,6 +4,12 @@ updates:
     directory: /
     schedule:
       interval: daily
+  # JS/Bun dependencies declared in package.json. The npm ecosystem reads the
+  # manifest; downstream templates adjust groupings as their dep set grows.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
   - package-ecosystem: docker
     directory: /infra
     schedule:

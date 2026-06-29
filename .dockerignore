@@ -4,10 +4,17 @@ dist
 coverage
 .target
 *.log
+*.tsbuildinfo
+
+### Tests
+tests
 
 ### VCS
 .git
 .gitignore
+
+### Nix
+.direnv
 
 ### AtomiCloud
 .kloop/

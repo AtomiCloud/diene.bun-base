@@ -1,0 +1,21 @@
+# Shared test task file. Imported twice from the root Taskfile — once as the
+# `unit` namespace and once as `int` — with MODE/CONFIG supplied per include so
+# the same three tasks (default/coverage/watch) drive both suites. Bun parses
+# `--config` as a global flag, so the value is attached with `=`.
+version: '3'
+vars:
+  MODE: '{{.MODE | default "unit"}}'
+  CONFIG: '{{.CONFIG | default "bunfig.unit.toml"}}'
+tasks:
+  default:
+    desc: 'Run {{.MODE}} tests'
+    cmds:
+      - bun test --config={{.CONFIG}}
+  coverage:
+    desc: 'Run {{.MODE}} tests with coverage (lcov + text artifacts)'
+    cmds:
+      - bun test --config={{.CONFIG}} --coverage
+  watch:
+    desc: 'Run {{.MODE}} tests in watch mode'
+    cmds:
+      - bun test --config={{.CONFIG}} --watch

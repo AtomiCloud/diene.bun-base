@@ -3,13 +3,55 @@ includes:
   docker: tasks/Taskfile.docker.yaml
   helm: tasks/Taskfile.helm.yaml
   secret: tasks/Taskfile.secret.yaml
+  # The same tasks/Taskfile.test.yaml is imported twice, parameterised by
+  # MODE/CONFIG, to expose parallel `unit:*` and `int:*` namespaces.
+  unit:
+    taskfile: tasks/Taskfile.test.yaml
+    vars:
+      MODE: unit
+      CONFIG: bunfig.unit.toml
+  int:
+    taskfile: tasks/Taskfile.test.yaml
+    vars:
+      MODE: int
+      CONFIG: bunfig.int.toml
 tasks:
   setup:
-    desc: Setup the repository
+    desc: Set up the repository (install deps + secrets; never calls CI scripts)
     cmds:
-      - ./scripts/ci/setup.sh
+      - bun install --frozen-lockfile
       - ./scripts/local/secrets.sh
+  clean:
+    desc: Remove build, dependency, and coverage artifacts
+    cmds:
+      - rm -rf dist node_modules coverage
+  build:
+    desc: Build the neutral sample bundle to dist/
+    cmds:
+      - bun run build
   lint:
     desc: Lints the whole code-base
     cmds:
       - pre-commit run --all-files
+  deadcode:
+    desc: Conservative dead-code gate (Knip, high-confidence)
+    cmds:
+      - bun run deadcode
+  deadcode:llm:
+    desc: Loose dead-code discovery for review — investigate findings, do not ignore
+    cmds:
+      - bun run deadcode:llm
+  test:
+    desc: Run unit + integration tests
+    cmds:
+      - task: unit:default
+      - task: int:default
+  test:coverage:
+    desc: Run unit + integration tests, producing separate coverage artifacts
+    cmds:
+      - task: unit:coverage
+      - task: int:coverage
+  test:watch:
+    desc: Watch the fast unit suite (aggregate watch entry point)
+    cmds:
+      - task: unit:watch
