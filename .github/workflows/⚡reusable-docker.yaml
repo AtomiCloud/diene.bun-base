@@ -20,9 +20,6 @@ on:
       version:
         required: false
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 jobs:
   build:
     name: Build Docker
