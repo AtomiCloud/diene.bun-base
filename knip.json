@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["tests/**/*.test.ts"],
+  "entry": ["src/index.ts", "tests/**/*.test.ts"],
   "project": ["src/**/*.ts"],
   "rules": {
     "files": "error",

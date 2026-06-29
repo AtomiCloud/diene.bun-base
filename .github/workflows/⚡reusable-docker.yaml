@@ -32,8 +32,6 @@ jobs:
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-docker@v2
-        with:
-          namespacelabs: false
 
       # Action
       - name: Build and Push Docker
@@ -43,7 +41,7 @@ jobs:
 
           # registry
           DOMAIN: ghcr.io
-          DOCKER_PASSWORD: ${{ github.token }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_USER: ${{ github.actor }}
 
           # downwards API

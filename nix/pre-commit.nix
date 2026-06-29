@@ -19,7 +19,7 @@ pre-commit-lib.run {
     a-biome = {
       enable = true;
       description = "Lint TypeScript/JavaScript with Biome";
-      entry = "${packages.biome}/bin/biome lint --no-errors-on-unmatched";
+      entry = "./node_modules/.bin/biome lint --no-errors-on-unmatched";
       files = "\\.(ts|tsx|mts|cts|js|jsx|mjs|cjs)$";
       name = "Biome Lint";
       pass_filenames = true;
@@ -29,7 +29,7 @@ pre-commit-lib.run {
     a-deadcode = {
       enable = true;
       description = "Detect repo dead code with Knip (conservative, high-confidence)";
-      entry = "${packages.knip}/bin/knip --config knip.json --no-config-hints";
+      entry = "./node_modules/.bin/knip --config knip.json";
       files = "\\.(ts|tsx)$";
       name = "Knip Repo Deadcode";
       pass_filenames = false;
@@ -39,7 +39,7 @@ pre-commit-lib.run {
     a-deadcode-production = {
       enable = true;
       description = "Detect production dead code with Knip (runtime surface)";
-      entry = "${packages.knip}/bin/knip --config knip.production.json --no-config-hints";
+      entry = "./node_modules/.bin/knip --config knip.production.json";
       files = "\\.(ts|tsx)$";
       name = "Knip Production Deadcode";
       pass_filenames = false;

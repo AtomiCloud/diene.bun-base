@@ -15,12 +15,13 @@ jobs:
       contents: read
       id-token: write
       packages: write
-    runs-on: ubuntu-22.04
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-atomi-nix-store-cache
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-nix@v3
-        with:
-          namespacelabs: false
 
       # Action
       - name: Build and Push Helm
@@ -29,7 +30,7 @@ jobs:
           # registry
           DOMAIN: ghcr.io
 
-          DOCKER_PASSWORD: ${{ github.token }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_USER: ${{ github.actor }}
 
           # downwards API

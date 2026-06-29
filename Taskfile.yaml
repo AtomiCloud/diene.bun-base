@@ -3,8 +3,6 @@ includes:
   docker: tasks/Taskfile.docker.yaml
   helm: tasks/Taskfile.helm.yaml
   secret: tasks/Taskfile.secret.yaml
-  # The same tasks/Taskfile.test.yaml is imported twice, parameterised by
-  # MODE/CONFIG, to expose parallel `unit:*` and `int:*` namespaces.
   unit:
     taskfile: tasks/Taskfile.test.yaml
     vars:
@@ -34,21 +32,9 @@ tasks:
     cmds:
       - pre-commit run --all-files
   deadcode:
-    desc: Conservative repo dead-code gate (Knip, high-confidence)
+    desc: Review dead-code findings
     cmds:
       - bun run deadcode
-  deadcode:production:
-    desc: Conservative production dead-code gate (Knip, runtime surface)
-    cmds:
-      - bun run deadcode:production
-  deadcode:llm:
-    desc: Loose repo dead-code discovery for review — investigate findings, do not ignore
-    cmds:
-      - bun run deadcode:llm
-  deadcode:production:llm:
-    desc: Loose production dead-code discovery for review — investigate findings, do not ignore
-    cmds:
-      - bun run deadcode:production:llm
   test:
     desc: Run unit + integration tests
     cmds:

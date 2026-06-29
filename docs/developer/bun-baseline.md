@@ -20,27 +20,24 @@ see [Taskfile](standard/taskfile.md), [CI/CD](standard/ci-cd.md),
 
 All commands run inside the Nix dev shell (`direnv allow` once). Use `pls`:
 
-| Command                       | What it does                                              |
-| ----------------------------- | --------------------------------------------------------- |
-| `pls setup`                   | Install pinned deps + Infisical login (no CI scripts)     |
-| `pls lint`                    | Run all pre-commit hooks (Biome, Knip, treefmt, …)        |
-| `pls deadcode`                | Conservative repo dead-code gate (tests count as entries) |
-| `pls deadcode:production`     | Conservative runtime dead-code gate (`src/index.ts`)      |
-| `pls deadcode:llm`            | Loose repo dead-code discovery for review                 |
-| `pls deadcode:production:llm` | Loose runtime dead-code discovery for review              |
-| `pls unit`                    | Run unit tests                                            |
-| `pls unit:coverage`           | Unit tests + coverage artifact (`coverage/unit`)          |
-| `pls unit:watch`              | Unit tests in watch mode                                  |
-| `pls int`                     | Integration tests (Testcontainers, needs Docker)          |
-| `pls int:coverage`            | Integration tests + coverage artifact (`coverage/int`)    |
-| `pls int:watch`               | Integration tests in watch mode                           |
-| `pls test`                    | Unit + integration tests                                  |
-| `pls test:coverage`           | Both suites, separate coverage artifacts                  |
-| `pls test:watch`              | Watch the fast unit suite (aggregate watch entry point)   |
-| `pls build`                   | Bundle the sample entrypoint to `dist/index.js`           |
-| `pls clean`                   | Remove `dist`, `node_modules`, `coverage`                 |
-| `pls docker:build`            | Build the runtime image locally                           |
-| `pls docker:run`              | Run the built image                                       |
+| Command             | What it does                                            |
+| ------------------- | ------------------------------------------------------- |
+| `pls setup`         | Install pinned deps + Infisical login (no CI scripts)   |
+| `pls lint`          | Run all pre-commit hooks (Biome, Knip, treefmt, …)      |
+| `pls deadcode`      | Loose repo + runtime dead-code review                   |
+| `pls unit`          | Run unit tests                                          |
+| `pls unit:coverage` | Unit tests + coverage artifact (`coverage/unit`)        |
+| `pls unit:watch`    | Unit tests in watch mode                                |
+| `pls int`           | Integration tests (Testcontainers, needs Docker)        |
+| `pls int:coverage`  | Integration tests + coverage artifact (`coverage/int`)  |
+| `pls int:watch`     | Integration tests in watch mode                         |
+| `pls test`          | Unit + integration tests                                |
+| `pls test:coverage` | Both suites, separate coverage artifacts                |
+| `pls test:watch`    | Watch the fast unit suite (aggregate watch entry point) |
+| `pls build`         | Bundle the sample entrypoint to `dist/index.js`         |
+| `pls clean`         | Remove `dist`, `node_modules`, `coverage`               |
+| `pls docker:build`  | Build the runtime image locally                         |
+| `pls docker:run`    | Run the built image                                     |
 
 ## Test modes
 
@@ -71,12 +68,8 @@ namespaces — there is one test recipe, not two.
   separate flags (`unit`, `int`). That step is guarded by both
   `continue-on-error: true` and `fail_ci_if_error: false`, so an upload failure
   (e.g. a missing `CODECOV_TOKEN`) never fails the job — the blocking gate is the
-  local test/coverage run. The CI scripts (`scripts/ci/test.sh` and its
-  `test-unit.sh` / `test-int.sh` wrappers) additionally attempt a best-effort
-  `codecov` CLI upload when the CLI is present locally, and skip it otherwise
-  (set `CODECOV_DISABLE=true` to skip explicitly). Thresholds live in
-  `codecov.yml` and are `informational: true` by default so they never fail a PR
-  on their own.
+  local test/coverage run. Thresholds live in `codecov.yml` and are
+  `informational: true` by default so they never fail a PR on their own.
 
 ## Build & runtime
 

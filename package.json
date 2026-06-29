@@ -15,20 +15,19 @@
     "test": "bun test --config=bunfig.unit.toml",
     "test:unit": "bun test --config=bunfig.unit.toml",
     "test:int": "bun test --config=bunfig.int.toml",
+    "test:knip": "./scripts/ci/knip-contract.sh",
     "test:unit:watch": "bun test --config=bunfig.unit.toml --watch",
     "coverage:unit": "bun test --config=bunfig.unit.toml --coverage --coverage-reporter=lcov",
     "coverage:int": "bun test --config=bunfig.int.toml --coverage --coverage-reporter=lcov",
     "lint": "biome lint .",
     "format": "biome format --write .",
-    "deadcode": "knip --config knip.json",
-    "deadcode:production": "knip --config knip.production.json",
-    "deadcode:llm": "knip --config knip.llm.json --no-exit-code",
-    "deadcode:production:llm": "knip --config knip.production.llm.json --no-exit-code"
+    "deadcode": "./scripts/ci/deadcode.sh"
   },
   "dependencies": {
     "ioredis": "^5.4.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
     "@types/bun": "^1.1.14",
     "@types/node": "^22.10.5",
     "knip": "^5.41.1",

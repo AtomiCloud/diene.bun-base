@@ -4,14 +4,14 @@ on:
 jobs:
   unit:
     name: Unit Tests
-    runs-on: ubuntu-22.04
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-atomi-nix-store-cache
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
-        with:
-          namespacelabs: false
       - name: Run unit tests
         run: nix develop .#ci -c ./scripts/ci/test-unit.sh
-      # Preserve coverage even if the gate above failed, so it is always uploadable.
       - name: Upload unit coverage artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -19,10 +19,6 @@ jobs:
           name: coverage-unit
           path: coverage/unit
           if-no-files-found: warn
-      # Upload unit coverage to Codecov under its own flag. Non-blocking: both
-      # `continue-on-error` and `fail_ci_if_error: false` keep an upload failure
-      # from failing the job — the blocking gate is the local test/coverage run
-      # above.
       - name: Upload unit coverage to Codecov
         if: always()
         continue-on-error: true
@@ -30,5 +26,6 @@ jobs:
         with:
           files: coverage/unit/lcov.info
           flags: unit
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
           disable_search: true

@@ -10,7 +10,8 @@ maintenance).
 
 # Development Environment
 
-All binaries, tools, and PATH are managed by **Nix**. Do not install tools manually or modify PATH outside of the nix configuration.
+Nix manages the dev shell and system tools. Bun installs project dependencies
+from `package.json` / `bun.lock`.
 
 ## Prerequisites
 
@@ -28,8 +29,8 @@ Once allowed, direnv automatically loads the development environment whenever yo
 
 ## Bun Workflow
 
-This template is a [Bun](https://bun.com) project. Bun, Biome, and Knip are
-provided by Nix; the project dependencies are pinned by `bun.lock`.
+This template is a [Bun](https://bun.com) project. Bun is provided by Nix;
+Biome and Knip are pinned as dev dependencies in `package.json` / `bun.lock`.
 
 ```bash
 bun install --frozen-lockfile          # install pinned dependencies
@@ -37,10 +38,7 @@ bunx tsc --noEmit                      # type-check
 bun test --config=bunfig.unit.toml     # fast unit tests (pure src/lib)
 bun test --config=bunfig.int.toml      # integration tests (Testcontainers, needs Docker)
 bun run build                          # bundle the sample entrypoint to dist/
-bun run deadcode                       # conservative repo dead-code gate
-bun run deadcode:production            # conservative runtime dead-code gate
-bun run deadcode:llm                   # loose repo dead-code discovery for review
-bun run deadcode:production:llm        # loose runtime dead-code discovery for review
+pls deadcode                           # loose repo + runtime dead-code review
 ```
 
 > **Note:** Bun parses `--config` as a global flag, so the value must be
@@ -58,17 +56,16 @@ sample value.
 
 ### Dead-code configs
 
-- `knip.json` — **conservative repo** gate. Test files are valid entry points.
+- `knip.json` — **conservative repo** gate. `src/index.ts` and test files are
+  valid entry points.
 - `knip.production.json` — **conservative production** gate. Runtime starts at
   `src/index.ts`; the Redis adapter must stay reachable through that composition
   root, not by being listed as its own entry.
-- `knip.llm.json` — **loose repo** discovery (`bun run deadcode:llm`).
-- `knip.production.llm.json` — **loose production** discovery
-  (`bun run deadcode:production:llm`).
+- `knip.llm.json` and `knip.production.llm.json` — loose review configs run by
+  `pls deadcode`.
 
-Loose findings are prompts for an agent/human to **investigate**, not a backlog
-of ignores to add. Prefer removing genuinely unused code or wiring up the
-dependency over silencing the finding.
+`pls lint` runs the conservative gates. Loose findings are prompts for an
+agent/human to **investigate**, not a backlog of ignores to add.
 
 ## Nix Configuration
 

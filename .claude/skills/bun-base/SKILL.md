@@ -21,10 +21,9 @@ Reference: [docs/developer/bun-baseline.md](../../../docs/developer/bun-baseline
 
 ## Dead-code review
 
-- `pls deadcode` is the conservative, high-confidence gate (run by pre-commit/CI).
-- `pls deadcode:llm` is **loose discovery**. Treat every finding as a prompt to
-  **investigate** — remove genuinely unused code or wire up the dependency.
-  Do **not** silence findings by default.
+- `pls lint` runs the conservative Knip gates.
+- `pls deadcode` is loose repo + runtime discovery. Treat every finding as a
+  prompt to **investigate**.
 
 ## Template maintenance
 
