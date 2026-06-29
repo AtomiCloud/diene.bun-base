@@ -14,3 +14,9 @@ jobs:
   build:
     name: Build Validation
     uses: ./.github/workflows/⚡reusable-build.yaml
+  docker:
+    name: Docker Image
+    uses: ./.github/workflows/⚡reusable-docker.yaml
+    with:
+      image_name: diene-bun-base
+      dockerfile: ./infra/Dockerfile
