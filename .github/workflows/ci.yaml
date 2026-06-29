@@ -5,3 +5,12 @@ jobs:
   precommit:
     name: Lint & Pre-Commit
     uses: ./.github/workflows/⚡reusable-precommit.yaml
+  unit:
+    name: Unit Tests
+    uses: ./.github/workflows/⚡reusable-test-unit.yaml
+  int:
+    name: Integration Tests
+    uses: ./.github/workflows/⚡reusable-test-int.yaml
+  build:
+    name: Build Validation
+    uses: ./.github/workflows/⚡reusable-build.yaml
