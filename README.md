@@ -60,8 +60,8 @@ sample value.
 
 - `knip.json` — **conservative repo** gate. Test files are valid entry points.
 - `knip.production.json` — **conservative production** gate. Runtime starts at
-  `src/index.ts` plus the Redis adapter example; test-only reachability does
-  not count.
+  `src/index.ts`; the Redis adapter must stay reachable through that composition
+  root, not by being listed as its own entry.
 - `knip.llm.json` — **loose repo** discovery (`bun run deadcode:llm`).
 - `knip.production.llm.json` — **loose production** discovery
   (`bun run deadcode:production:llm`).

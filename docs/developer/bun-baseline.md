@@ -20,27 +20,27 @@ see [Taskfile](standard/taskfile.md), [CI/CD](standard/ci-cd.md),
 
 All commands run inside the Nix dev shell (`direnv allow` once). Use `pls`:
 
-| Command                       | What it does                                                   |
-| ----------------------------- | -------------------------------------------------------------- |
-| `pls setup`                   | Install pinned deps + Infisical login (no CI scripts)          |
-| `pls lint`                    | Run all pre-commit hooks (Biome, Knip, treefmt, …)             |
-| `pls deadcode`                | Conservative repo dead-code gate (tests count as entries)      |
-| `pls deadcode:production`     | Conservative runtime dead-code gate (`src/index.ts` + adapter) |
-| `pls deadcode:llm`            | Loose repo dead-code discovery for review                      |
-| `pls deadcode:production:llm` | Loose runtime dead-code discovery for review                   |
-| `pls unit`                    | Run unit tests                                                 |
-| `pls unit:coverage`           | Unit tests + coverage artifact (`coverage/unit`)               |
-| `pls unit:watch`              | Unit tests in watch mode                                       |
-| `pls int`                     | Integration tests (Testcontainers, needs Docker)               |
-| `pls int:coverage`            | Integration tests + coverage artifact (`coverage/int`)         |
-| `pls int:watch`               | Integration tests in watch mode                                |
-| `pls test`                    | Unit + integration tests                                       |
-| `pls test:coverage`           | Both suites, separate coverage artifacts                       |
-| `pls test:watch`              | Watch the fast unit suite (aggregate watch entry point)        |
-| `pls build`                   | Bundle the sample entrypoint to `dist/index.js`                |
-| `pls clean`                   | Remove `dist`, `node_modules`, `coverage`                      |
-| `pls docker:build`            | Build the runtime image locally                                |
-| `pls docker:run`              | Run the built image                                            |
+| Command                       | What it does                                              |
+| ----------------------------- | --------------------------------------------------------- |
+| `pls setup`                   | Install pinned deps + Infisical login (no CI scripts)     |
+| `pls lint`                    | Run all pre-commit hooks (Biome, Knip, treefmt, …)        |
+| `pls deadcode`                | Conservative repo dead-code gate (tests count as entries) |
+| `pls deadcode:production`     | Conservative runtime dead-code gate (`src/index.ts`)      |
+| `pls deadcode:llm`            | Loose repo dead-code discovery for review                 |
+| `pls deadcode:production:llm` | Loose runtime dead-code discovery for review              |
+| `pls unit`                    | Run unit tests                                            |
+| `pls unit:coverage`           | Unit tests + coverage artifact (`coverage/unit`)          |
+| `pls unit:watch`              | Unit tests in watch mode                                  |
+| `pls int`                     | Integration tests (Testcontainers, needs Docker)          |
+| `pls int:coverage`            | Integration tests + coverage artifact (`coverage/int`)    |
+| `pls int:watch`               | Integration tests in watch mode                           |
+| `pls test`                    | Unit + integration tests                                  |
+| `pls test:coverage`           | Both suites, separate coverage artifacts                  |
+| `pls test:watch`              | Watch the fast unit suite (aggregate watch entry point)   |
+| `pls build`                   | Bundle the sample entrypoint to `dist/index.js`           |
+| `pls clean`                   | Remove `dist`, `node_modules`, `coverage`                 |
+| `pls docker:build`            | Build the runtime image locally                           |
+| `pls docker:run`              | Run the built image                                       |
 
 ## Test modes
 
