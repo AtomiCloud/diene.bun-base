@@ -1,10 +1,31 @@
-# bun-base
+# Development Environment
 
-[![CI](https://github.com/AtomiCloud/diene.bun-base/actions/workflows/ci.yaml/badge.svg)](https://github.com/AtomiCloud/diene.bun-base/actions/workflows/ci.yaml)
-[![codecov](https://codecov.io/gh/AtomiCloud/diene.bun-base/branch/main/graph/badge.svg)](https://codecov.io/gh/AtomiCloud/diene.bun-base)
+All binaries, tools, and PATH are managed by **Nix**. Do not install tools manually or modify PATH outside of the nix configuration.
 
-Bun template foundation for `AtomiCloud/diene.bun-base`.
+## Prerequisites
 
-See [docs/developer/bun-baseline.md](docs/developer/bun-baseline.md) for setup,
-local commands, test modes, coverage, build/runtime, and template-maintenance
-notes.
+1. **[Nix](https://nixos.org/download)** — package manager
+2. **[Docker](https://docs.docker.com/get-docker)** — container runtime
+3. **[direnv](https://direnv.net/docs/installation.html)** — auto-loads the nix shell on `cd`
+
+## Getting Started
+
+```bash
+direnv allow    # first time only — loads the nix dev shell
+```
+
+Once allowed, direnv automatically loads the development environment whenever you enter the project directory.
+
+## Nix Configuration
+
+See [docs/developer/standard/nix.md](docs/developer/standard/nix.md) for the full guide on:
+
+- File structure (`flake.nix`, `nix/`, `.envrc`)
+- Adding/removing packages
+- Environment groups and shells
+- Formatters and pre-commit hooks
+- Adding registries
+
+## Bun Baseline
+
+See [docs/developer/bun-baseline.md](docs/developer/bun-baseline.md) for Bun-specific commands, test modes, coverage, and runtime notes.
