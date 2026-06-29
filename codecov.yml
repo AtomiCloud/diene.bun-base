@@ -1,12 +1,3 @@
-# Codecov configuration for the Bun baseline.
-#
-# Unit and integration coverage are uploaded under separate flags (via the
-# codecov/codecov-action steps in .github/workflows/⚡reusable-test-unit.yaml
-# and ⚡reusable-test-int.yaml) so downstream templates can tune thresholds per
-# suite. Upload is best-effort in CI — the BLOCKING gate is the
-# local test/coverage run, so statuses here are informational and never fail a
-# PR on their own. Downstream templates flip `informational: false` and raise
-# `target` once they have a baseline.
 coverage:
   status:
     project:

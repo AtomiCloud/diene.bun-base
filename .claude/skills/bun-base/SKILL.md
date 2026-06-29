@@ -21,7 +21,7 @@ Reference: [docs/developer/bun-baseline.md](../../../docs/developer/bun-baseline
 
 ## Dead-code review
 
-- `pls lint` runs the conservative Knip gates.
+- `pls lint` runs the conservative Knip gates and the Knip contract.
 - `pls deadcode` is loose repo + runtime discovery. Treat every finding as a
   prompt to **investigate**.
 

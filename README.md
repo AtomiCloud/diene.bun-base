@@ -30,15 +30,16 @@ Once allowed, direnv automatically loads the development environment whenever yo
 ## Bun Workflow
 
 This template is a [Bun](https://bun.com) project. Bun is provided by Nix;
-Biome and Knip are pinned as dev dependencies in `package.json` / `bun.lock`.
+Biome and Knip are declared in `package.json` and locked by `bun.lock`.
+Prettier owns formatting; Biome is lint-only.
 
 ```bash
-bun install --frozen-lockfile          # install pinned dependencies
-bunx tsc --noEmit                      # type-check
-bun test --config=bunfig.unit.toml     # fast unit tests (pure src/lib)
-bun test --config=bunfig.int.toml      # integration tests (Testcontainers, needs Docker)
-bun run build                          # bundle the sample entrypoint to dist/
-pls deadcode                           # loose repo + runtime dead-code review
+pls setup       # install pinned dependencies
+pls lint        # pre-commit gates
+pls unit        # fast unit tests
+pls int         # integration tests, needs Docker
+pls build       # bundle to dist/
+pls deadcode    # loose repo + runtime dead-code review
 ```
 
 > **Note:** Bun parses `--config` as a global flag, so the value must be
@@ -47,7 +48,7 @@ pls deadcode                           # loose repo + runtime dead-code review
 ### Source layout
 
 - `src/lib/` — pure, side-effect-free behaviour (unit-tested).
-- `src/adapter/` — side-effect boundary (integration-tested via Testcontainers).
+- `src/adapters/` — side-effect boundary (integration-tested via Testcontainers).
 - `src/index.ts` — composition root wiring the library to the adapter.
 
 The default executable prints a composed sample key. When `REDIS_HOST` and

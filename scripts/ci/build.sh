@@ -3,11 +3,10 @@ set -euo pipefail
 
 ARTIFACT="dist/index.js"
 
-echo "📦 Installing dependencies..."
-bun install --frozen-lockfile
+./scripts/ci/setup.sh
 
 echo "🔨 Building sample bundle..."
-bun run build
+bun build ./src/index.ts --outdir ./dist --target bun
 
 if [[ ! -f ${ARTIFACT} ]]; then
   echo "❌ Build artifact missing: ${ARTIFACT}" >&2

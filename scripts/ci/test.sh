@@ -10,8 +10,7 @@ fi
 CONFIG="bunfig.${MODE}.toml"
 COVERAGE_DIR="coverage/${MODE}"
 
-echo "📦 Installing dependencies..."
-bun install --frozen-lockfile
+./scripts/ci/setup.sh
 
 echo "🧪 Running ${MODE} tests with coverage..."
 rm -rf "${COVERAGE_DIR}"

@@ -46,6 +46,16 @@ pre-commit-lib.run {
       language = "system";
     };
 
+    a-knip-contract = {
+      enable = true;
+      description = "Validate Knip entry contracts";
+      entry = "./scripts/local/knip-contract.sh";
+      files = "(knip(\\.production)?\\.json|scripts/local/knip-contract\\.sh)";
+      name = "Knip Contract";
+      pass_filenames = false;
+      language = "system";
+    };
+
     a-enforce-gitlint = {
       enable = true;
       description = "Enforce atomi_releaser conforms to gitlint";

@@ -1,15 +1,15 @@
-import { afterAll, beforeAll, describe, it } from "bun:test";
-import should from "should";
-import { GenericContainer, type StartedTestContainer, Wait } from "testcontainers";
-import type { IKeyValueStore } from "../../src/adapter/kv-store";
-import { createRedisStore, persistSample } from "../../src/index";
+import { afterAll, beforeAll, describe, it } from 'bun:test';
+import should from 'should';
+import { GenericContainer, type StartedTestContainer, Wait } from 'testcontainers';
+import type { IKeyValueStore } from '../../src/adapters/kv-store';
+import { createRedisStore, persistSample } from '../../src/index';
 
-describe("RedisKeyValueStore (Testcontainers)", () => {
+describe('RedisKeyValueStore (Testcontainers)', () => {
   let container: StartedTestContainer | undefined;
   let subject: IKeyValueStore | undefined;
 
   beforeAll(async () => {
-    container = await new GenericContainer("redis:7-alpine")
+    container = await new GenericContainer('redis:7-alpine')
       .withExposedPorts(6379)
       .withWaitStrategy(Wait.forLogMessage(/Ready to accept connections/))
       .start();
@@ -24,21 +24,16 @@ describe("RedisKeyValueStore (Testcontainers)", () => {
     await container?.stop();
   }, 120_000);
 
-  it("should persist and retrieve a namespaced value", async () => {
-    const expected = "hello";
+  it('should persist and retrieve a namespaced value', async () => {
+    const expected = 'hello';
 
-    const actual = await persistSample(
-      subject as IKeyValueStore,
-      "Bun Base",
-      "sample key",
-      expected,
-    );
+    const actual = await persistSample(subject as IKeyValueStore, 'Bun Base', 'sample key', expected);
 
     should(actual).equal(expected);
   });
 
-  it("should return null for an unknown key", async () => {
-    const input = "bun-base:missing";
+  it('should return null for an unknown key', async () => {
+    const input = 'bun-base:missing';
 
     const actual = await (subject as IKeyValueStore).get(input);
 

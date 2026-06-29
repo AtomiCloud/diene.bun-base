@@ -39,7 +39,7 @@ All commits must follow the conventional commits specification. Use `sg` for lin
 
 | Command                                       | Purpose                                        |
 | --------------------------------------------- | ---------------------------------------------- |
-| `pls setup`                                   | Install deps + Infisical login (no CI scripts) |
+| `pls setup`                                   | Install deps + Infisical login                 |
 | `pls lint`                                    | All pre-commit hooks (Biome, Knip, treefmt, …) |
 | `pls deadcode`                                | Loose repo + runtime dead-code review          |
 | `pls unit` / `int` / `test`                   | Unit / integration / both                      |
@@ -52,12 +52,12 @@ All commits must follow the conventional commits specification. Use `sg` for lin
 ## Test modes & coverage
 
 - **Unit** (`bunfig.unit.toml`) — fast, pure `src/lib`, no containers.
-- **Integration** (`bunfig.int.toml`) — `src/adapter` against a Testcontainers Redis (needs Docker).
+- **Integration** (`bunfig.int.toml`) — `src/adapters` against a Testcontainers Redis (needs Docker).
 - The local test/coverage run is the **blocking** gate; the **Codecov upload is non-blocking**. Coverage paths/reporters live in the `bunfig.*.toml` files; thresholds in `codecov.yml`.
 
 ## Dead-code expectations
 
-`pls lint` checks the conservative repo and runtime surfaces. `pls deadcode` runs loose repo + runtime discovery; treat findings as prompts to **investigate**.
+`pls lint` checks the conservative repo/runtime surfaces and the Knip contract. `pls deadcode` runs loose repo + runtime discovery; treat findings as prompts to **investigate**.
 
 ## Template-maintenance expectations
 

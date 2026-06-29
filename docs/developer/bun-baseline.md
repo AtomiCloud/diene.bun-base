@@ -22,7 +22,7 @@ All commands run inside the Nix dev shell (`direnv allow` once). Use `pls`:
 
 | Command             | What it does                                            |
 | ------------------- | ------------------------------------------------------- |
-| `pls setup`         | Install pinned deps + Infisical login (no CI scripts)   |
+| `pls setup`         | Install pinned deps + Infisical login                   |
 | `pls lint`          | Run all pre-commit hooks (Biome, Knip, treefmt, …)      |
 | `pls deadcode`      | Loose repo + runtime dead-code review                   |
 | `pls unit`          | Run unit tests                                          |
@@ -46,12 +46,15 @@ Two suites are split by Bun config so the fast path stays Docker-free:
 - **Unit** (`bunfig.unit.toml`, root `tests/unit`) — pure `src/lib` behaviour.
   No containers; this is the default fast path.
 - **Integration** (`bunfig.int.toml`, root `tests/integration`) — exercises the
-  `src/adapter` boundary against a throwaway Redis container via Testcontainers.
+  `src/adapters` boundary against a throwaway Redis container via Testcontainers.
   Slow and Docker-dependent, so it lives on a dedicated path.
 
 The same `tasks/Taskfile.test.yaml` is imported twice from the root `Taskfile.yaml`
 (parameterised by `MODE`/`CONFIG`) to produce the parallel `unit:*` and `int:*`
 namespaces — there is one test recipe, not two.
+
+Prettier owns formatting. Biome is lint-only. The Knip contract runs through
+`pls lint`.
 
 ## Coverage gates
 
@@ -108,7 +111,7 @@ template is expected to adapt:
 - **Docker runtime entrypoint** — `infra/Dockerfile` `ENTRYPOINT`.
 - **Badges / template promotion** — the `adelphi-liong/diene.bun-base` paths in
   `README.md` badges are rewritten on promotion.
-- **Sample source/tests** — `src/lib`, `src/adapter`, `src/index.ts`, and the
+- **Sample source/tests** — `src/lib`, `src/adapters`, `src/index.ts`, and the
   matching `tests/` suites are illustrative and replaced per service.
 
 The Helm and secret task files (`tasks/Taskfile.helm.yaml`,

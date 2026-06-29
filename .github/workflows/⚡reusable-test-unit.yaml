@@ -13,6 +13,7 @@ jobs:
       - nscloud-cache-tag-atomi-nix-store-cache
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
+      - uses: AtomiCloud/actions.cache-bun@v1
       - name: Run unit tests
         run: nix develop .#ci -c ./scripts/ci/test-unit.sh
       - name: Upload unit coverage artifact

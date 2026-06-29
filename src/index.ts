@@ -1,6 +1,6 @@
-import type { IKeyValueStore, RedisConnection } from "./adapter/kv-store";
-import { RedisKeyValueStore } from "./adapter/redis-kv-store";
-import { namespacedKey } from "./lib/slug";
+import type { IKeyValueStore, RedisConnection } from './adapters/kv-store';
+import { RedisKeyValueStore } from './adapters/redis-kv-store';
+import { namespacedKey } from './lib/slug';
 
 export function buildSampleKey(namespace: string, key: string): string {
   return namespacedKey(namespace, key);
@@ -33,7 +33,7 @@ async function main(): Promise<void> {
   if (connection) {
     const store = createRedisStore(connection);
     try {
-      const value = await persistSample(store, "Bun Base", "sample key", "sample value");
+      const value = await persistSample(store, 'Bun Base', 'sample key', 'sample value');
       console.log(`round-tripped value: ${value}`);
     } finally {
       await store.close();
@@ -41,7 +41,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  console.log(`composed key: ${buildSampleKey("Bun Base", "sample key")}`);
+  console.log(`composed key: ${buildSampleKey('Bun Base', 'sample key')}`);
 }
 
 if (import.meta.main) {
