@@ -53,8 +53,7 @@ The same `tasks/Taskfile.test.yaml` is imported twice from the root `Taskfile.ya
 (parameterised by `MODE`/`CONFIG`) to produce the parallel `unit:*` and `int:*`
 namespaces — there is one test recipe, not two.
 
-Prettier owns formatting. Biome is lint-only. The Knip contract runs through
-`pls lint`.
+Prettier owns formatting. Biome is lint-only.
 
 ## Coverage gates
 

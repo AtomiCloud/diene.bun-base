@@ -57,7 +57,7 @@ All commits must follow the conventional commits specification. Use `sg` for lin
 
 ## Dead-code expectations
 
-`pls lint` checks the conservative repo/runtime surfaces and the Knip contract. `pls deadcode` runs loose repo + runtime discovery; treat findings as prompts to **investigate**.
+`pls lint` checks the conservative repo/runtime surfaces. `pls deadcode` runs loose repo + runtime discovery; treat findings as prompts to **investigate**.
 
 ## Template-maintenance expectations
 
