@@ -39,7 +39,7 @@ pre-commit-lib.run {
     a-deadcode-production = {
       enable = true;
       description = "Detect production dead code with Knip (runtime surface)";
-      entry = "${packages.knip}/bin/knip --config knip.production.json --production";
+      entry = "${packages.knip}/bin/knip --config knip.production.json";
       files = "\\.(ts|tsx)$";
       name = "Knip Production Deadcode";
       pass_filenames = false;

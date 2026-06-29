@@ -6,10 +6,7 @@
   "type": "module",
   "module": "src/index.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./adapter/kv-store": "./src/adapter/kv-store.ts",
-    "./adapter/redis-kv-store": "./src/adapter/redis-kv-store.ts",
-    "./lib/slug": "./src/lib/slug.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "start": "bun run src/index.ts",
@@ -24,9 +21,9 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "deadcode": "knip --config knip.json",
-    "deadcode:production": "knip --config knip.production.json --production",
+    "deadcode:production": "knip --config knip.production.json",
     "deadcode:llm": "knip --config knip.llm.json --no-exit-code",
-    "deadcode:production:llm": "knip --config knip.production.llm.json --production --no-exit-code"
+    "deadcode:production:llm": "knip --config knip.production.llm.json --no-exit-code"
   },
   "dependencies": {
     "ioredis": "^5.4.2"
