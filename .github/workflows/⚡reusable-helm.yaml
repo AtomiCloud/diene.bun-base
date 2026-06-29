@@ -15,13 +15,12 @@ jobs:
       contents: read
       id-token: write
       packages: write
-    runs-on:
-      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
-      - nscloud-cache-size-50gb
-      - nscloud-cache-tag-atomi-nix-store-cache
+    runs-on: ubuntu-22.04
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-nix@v3
+        with:
+          namespacelabs: false
 
       # Action
       - name: Build and Push Helm

@@ -32,6 +32,8 @@ jobs:
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-docker@v2
+        with:
+          namespacelabs: false
 
       # Action
       - name: Build and Push Docker
