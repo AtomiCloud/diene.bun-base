@@ -1,6 +1,9 @@
 name: ⚡ Reusable Unit Tests
 on:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: false
 jobs:
   unit:
     name: Unit Tests
