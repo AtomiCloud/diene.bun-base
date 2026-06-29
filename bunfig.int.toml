@@ -1,0 +1,10 @@
+# Integration test configuration: exercises the src/adapter boundary against
+# Testcontainers. Containers make this slow + Docker-dependent, so it is kept on
+# a dedicated path (`bun test --config=bunfig.int.toml`). Each suite imports
+# `should` directly, so no preload is needed.
+[test]
+root = "tests/integration"
+timeout = 120000
+coverageReporter = ["text", "lcov"]
+coverageDir = "coverage/int"
+coverageSkipTestFiles = true

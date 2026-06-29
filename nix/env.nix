@@ -10,9 +10,11 @@ with packages;
 
   lint = [
     actionlint
+    biome
     gitlint
     go-task
     infralint
+    knip
     pre-commit
     sg
     shellcheck
@@ -20,6 +22,7 @@ with packages;
   ];
 
   main = [
+    bun
   ];
 
   releaser = [

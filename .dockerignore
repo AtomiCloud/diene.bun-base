@@ -1,6 +1,7 @@
 ### Build
 node_modules
 dist
+coverage
 .target
 *.log
 

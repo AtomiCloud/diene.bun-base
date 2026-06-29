@@ -24,6 +24,8 @@ let
       {
         inherit
           actionlint
+          biome
+          bun
           git
           gitlint
           go-task
@@ -41,7 +43,16 @@ let
       {
       }
     );
+
+    # Knip is not packaged in nixpkgs, so expose a thin wrapper that runs the
+    # project-local Knip (a devDependency) through Bun. This keeps the binary on
+    # PATH in every shell while the actual version stays pinned by bun.lock.
+    custom = {
+      knip = pkgs.writeShellScriptBin "knip" ''
+        exec ${pkgs-2605.bun}/bin/bunx --bun knip "$@"
+      '';
+    };
   };
 in
 with all;
-atomipkgs // nix-2605 // nix-unstable
+atomipkgs // nix-2605 // nix-unstable // custom
