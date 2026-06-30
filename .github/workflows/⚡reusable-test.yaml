@@ -19,11 +19,19 @@ jobs:
     steps:
       - uses: AtomiCloud/actions.setup-nix@v3
       - uses: AtomiCloud/actions.cache-bun@v1
+      - name: Validate test mode
+        env:
+          RAW_TEST_MODE: ${{ inputs.mode }}
+        run: |
+          case "$RAW_TEST_MODE" in
+            unit|int) echo "TEST_MODE=$RAW_TEST_MODE" >> "$GITHUB_ENV" ;;
+            *) echo "Unsupported test mode: $RAW_TEST_MODE" >&2; exit 1 ;;
+          esac
       - name: Setup Docker
         if: inputs.mode == 'int'
         uses: AtomiCloud/actions.setup-docker@v2
       - name: Run ${{ inputs.mode }} tests
-        run: nix develop .#ci -c ./scripts/ci/test-${{ inputs.mode }}.sh
+        run: nix develop .#ci -c "./scripts/ci/test-${TEST_MODE}.sh"
       - name: Upload ${{ inputs.mode }} coverage artifact
         if: always()
         uses: actions/upload-artifact@v7
