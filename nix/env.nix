@@ -21,7 +21,6 @@ with packages;
 
   main = [
     bun
-    nodejs_26
   ];
 
   releaser = [

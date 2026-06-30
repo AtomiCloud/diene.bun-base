@@ -53,9 +53,7 @@ pre-commit.
 
 ## Build & runtime
 
-- Bun is the application runtime. Node 26 (`nodejs_26`) is provided through Nix
-  (`nix/packages.nix`, `main` env group) only to align Node-facing tooling and
-  `@types/node`; it is not a build or runtime target.
+- Bun is the application runtime and build target.
 - `pls build` (and `scripts/ci/build.sh`) bundle `src/index.ts` to
   `dist/index.js` with `bun build --target bun`.
 - `infra/Dockerfile` is a multi-stage Bun image pinned by digest.
