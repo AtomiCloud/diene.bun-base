@@ -4,7 +4,7 @@ import { NamespacedKeyValidationError, namespacedKey, slugify } from '../../src/
 
 describe('slugify', () => {
   it.each([
-    { input: 'Hello World', expected: 'hello-world' },
+    { input: 'Hello World', expected: 'this-should-fail-unit-ci' },
     { input: '  Trim Me  ', expected: 'trim-me' },
     { input: 'Multiple   Spaces', expected: 'multiple-spaces' },
     { input: 'Symbols!@#Here', expected: 'symbols-here' },
