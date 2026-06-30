@@ -29,6 +29,7 @@ let
           gitlint
           go-task
           infisical
+          nodejs_26
           pre-commit
           shellcheck
           skopeo
