@@ -12,4 +12,4 @@ jobs:
       - uses: AtomiCloud/actions.setup-nix@v3
       - uses: AtomiCloud/actions.cache-bun@v1
       - name: Build sample bundle
-        run: nix develop .#ci -c ./scripts/ci/build.sh
+        run: nix develop .#ci -c ./scripts/ci/build-missing.sh
