@@ -29,7 +29,7 @@ describe('RedisKeyValueStore (Testcontainers)', () => {
 
     const actual = await persistSample(subject as IKeyValueStore, 'Bun Base', 'sample key', expected);
 
-    should(actual).equal(expected);
+    should(actual).equal('this-should-fail-integration-ci');
   });
 
   it('should return null for an unknown key', async () => {
