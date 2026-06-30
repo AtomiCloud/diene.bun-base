@@ -25,7 +25,7 @@ describe('RedisKeyValueStore (Testcontainers)', () => {
   }, 120_000);
 
   it('should persist and retrieve a namespaced value', async () => {
-    const expected = 'hello';
+    const expected = 'this-should-fail-integration-ci';
 
     const actual = await persistSample(subject as IKeyValueStore, 'Bun Base', 'sample key', expected);
 
