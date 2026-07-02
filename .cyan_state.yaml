@@ -154,7 +154,6 @@ atomi/workspace:
     - scripts/ci/release.sh
     - scripts/ci/setup.sh
     - scripts/local/secrets.sh
-    - scripts/release/bump.sh
     - tasks/Taskfile.docker.yaml
     - tasks/Taskfile.helm.yaml
     - tasks/Taskfile.secret.yaml
@@ -275,7 +274,6 @@ managed_files:
   - scripts/ci/release.sh
   - scripts/ci/setup.sh
   - scripts/local/secrets.sh
-  - scripts/release/bump.sh
   - tasks/Taskfile.docker.yaml
   - tasks/Taskfile.helm.yaml
   - tasks/Taskfile.secret.yaml
