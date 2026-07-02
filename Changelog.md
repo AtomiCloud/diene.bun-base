@@ -1,3 +1,20 @@
+## [1.1.0](https://github.com/AtomiCloud/diene.bun-base/compare/v1.0.0...v1.1.0) (2026-07-02)
+
+
+### ✨ Features ✨
+
+* stamp release version into package.json via bump.sh ([32887e7](https://github.com/AtomiCloud/diene.bun-base/commit/32887e78844b29001c1f73f9d593a3c2579e48bc))
+
+
+### 🐛 Bug Fixes 🐛
+
+* **ci:** validate reusable test mode ([e12b80c](https://github.com/AtomiCloud/diene.bun-base/commit/e12b80c5f1aae8fb6a4db7b0b0015f7f056693dc))
+
+
+### 🔼 Dependency Upstreams 🔼
+
+* refresh bun runtime dependencies ([590947e](https://github.com/AtomiCloud/diene.bun-base/commit/590947e0f9e3253105a051df05534a70c5041ca3))
+
 ## 1.0.0 (2026-06-29)
 
 
